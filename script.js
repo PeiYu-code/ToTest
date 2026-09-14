@@ -1,112 +1,62 @@
 // 1. 單字資料庫 (包含所有單字)
 const wordBank = [
-  { eng: "seek", ch: "尋找(v.)" },
-  { eng: "audience", ch: "觀眾(n.)" },
-  { eng: "series", ch: "系列(n.)" },
-  { eng: "technology", ch: "科技(n.)" },
-  { eng: "worth", ch: "值得... +Ving(adj.)" },
-  { eng: "foundation", ch: "基金會(n.)" },
-  { eng: "conference", ch: "會議(n.)" },
-  { eng: "increasingly", ch: "越來越...(adv.)" },
-  { eng: "organizer", ch: "籌辦人(n.)" },
-  { eng: "broad", ch: "廣泛的(adj.)" },
-  { eng: "range", ch: "範圍、系列(n.)" },
-  { eng: "field", ch: "領域(n.)" },
-  { eng: "philosophy", ch: "哲學(n.)" },
-  { eng: "launch", ch: "發起(v.)" },
-  { eng: "collection", ch: "收藏品(n.)" },
-  { eng: "numerous", ch: "許多(adj.)+可數n." },
-  { eng: "celebrity", ch: "名人(n.)" },
-  { eng: "fascination", ch: "著迷(n.)" },
-  { eng: "fiction", ch: "虛構的作品(n.)" },
-  { eng: "discuss", ch: "討論(v.)" },
-  { eng: "method", ch: "方式(n.)" },
-  { eng: "as well as", ch: "和" },
-  { eng: "for free", ch: "免費" },
-  { eng: "at present", ch: "現在、當下" },
-  { eng: "give... a try", ch: "嘗試" },
-  { eng: "broaden one's horizons", ch: "拓寬某人的視野" },
-  { eng: "exchange", ch: "交換(n., v.)" },
-  { eng: "expect", ch: "預期(v.)" },
-  { eng: "shelter", ch: "遮蔽、庇護(v., n.)" },
-  { eng: "fierce", ch: "強烈的(adj.)" },
-  { eng: "occupy", ch: "佔據(v.)" },
-  { eng: "occupation", ch: "職業(n.)" },
-  { eng: "vehicle", ch: "車輛(n.)" },
-  { eng: "temporary", ch: "暫時的(adj.)" },
-  { eng: "assistant", ch: "助理(n.)" },
-  { eng: "assist", ch: "協助(v.)" },
-  { eng: "originate", ch: "起源於(v.)" },
-  { eng: "origin", ch: "起源(n.)" },
-  { eng: "original", ch: "起初的(adj.)" },
-  { eng: "event", ch: "事件(n.)" },
-  { eng: "elder", ch: "長輩(n.); (家中的)年長的(adj.)" },
-  { eng: "neighborhood", ch: "鄰近地區(n.)" },
-  { eng: "cooperate", ch: "合作(v.)" },
-  { eng: "arrange", ch: "安排(v.)" },
-  { eng: "arrangement", ch: "安排(n.)" },
-  { eng: "relax", ch: "放鬆(v.)" },
-  { eng: "container", ch: "容器(n.)" },
-  { eng: "contain", ch: "包含(v.)" },
-  { eng: "stroll", ch: "散步(v., n.)" },
-  { eng: "spirit", ch: "精神、本質(n.)" },
-  { eng: "spiritual", ch: "精神上的(adj.)" },
-  { eng: "take part in", ch: "參加" },
-  { eng: "take place", ch: "發生、舉行" },
-  { eng: "come about", ch: "(非預期的)發生" },
-  { eng: "help... out", ch: "幫忙" },
-  { eng: "hand out", ch: "發放" },
-  { eng: "general", ch: "一般的(adj.)" },
-  { eng: "derive", ch: "源自於(v.) +from" },
-  { eng: "release", ch: "發行、釋放(v., n.)" },
-  { eng: "feature", ch: "以...為特色(v., n.)" },
-  { eng: "gossip", ch: "八卦(v., n.)" },
-  { eng: "reveal", ch: "揭露(v.)" },
-  { eng: "chase", ch: "追逐(v., n.)" },
-  { eng: "brand", ch: "品牌(n.)" },
-  { eng: "image", ch: "影像、形象(n.)" },
-  { eng: "edit", ch: "編輯(v.)" },
-  { eng: "edition", ch: "版本(n.)" },
-  { eng: "modify", ch: "修改(v.)" },
-  { eng: "modification", ch: "修改(n.)" },
-  { eng: "digitally", ch: "數位地(adv.)" },
-  { eng: "combine", ch: "結合(v.)" },
-  { eng: "combination", ch: "組合、結合(n.)" },
-  { eng: "standard", ch: "標準的(adj.); 標準(n.)" },
-  { eng: "widespread", ch: "廣泛的(adj.)" },
-  { eng: "constantly", ch: "持續地(adv.)" },
-  { eng: "alternative", ch: "另類的、替代的(adj.); 替代方案、選擇(n.)" },
-  { eng: "existing", ch: "現存的(adj.)" },
-  { eng: "exist", ch: "存在(v.)" },
-  { eng: "existence", ch: "存在(n.)" },
-  { eng: "take on", ch: "開始具有" },
-  { eng: "later on", ch: "之後" },
-  { eng: "in the beginning", ch: "起初" },
-  { eng: "too... to...", ch: "太...而無法..." },
-  { eng: "play a/an ... role", ch: "扮演...的角色" },
-  { eng: "astronaut", ch: "太空人(n.)" },
-  { eng: "gravity", ch: "重力(n.)" },
-  { eng: "powdered", ch: "粉狀的(adj.)" },
-  { eng: "regularly", ch: "規律地、經常地(adv.)" },
-  { eng: "tend", ch: "傾向於(v.) +to" },
-  { eng: "gather", ch: "聚集(v.)" },
-  { eng: "vision", ch: "視力(n.)" },
-  { eng: "decrease", ch: "減少(v., n.)" },
-  { eng: "limit", ch: "限制(v.); 極限(n.)" },
-  { eng: "physical", ch: "生理上的(adj.)" },
-  { eng: "circulation", ch: "血液循環(n.)" },
-  { eng: "maintain", ch: "維持(v.)" },
-  { eng: "sweat", ch: "汗水(n.); 流汗(v.)" },
-  { eng: "otherwise", ch: "否則(adv.)" },
-  { eng: "bump", ch: "碰撞(v.)" },
-  { eng: "sacrifice", ch: "犧牲(v., n.)" },
-  { eng: "out of this world", ch: "極好的" },
-  { eng: "work out", ch: "健身" },
-  { eng: "work up a sweat", ch: "(因運動)流汗" },
-  { eng: "have a lie-down", ch: "躺下休息" }
+  { eng: "recipe", ch: "食譜(n.)" },
+  { eng: "silk", ch: "絲綢(n.)" },
+  { eng: "underwear", ch: "內衣褲(n.)" },
+  { eng: "wax", ch: "蠟、耳垢(n.); 替...打蠟(v.)" },
+  { eng: "firework", ch: "煙火(n.)" },
+  { eng: "chip", ch: "洋芋片、晶片(n.); 碰出缺口(v.)" },
+  { eng: "clay", ch: "陶土、黏土(n.)" },
+  { eng: "plug", ch: "插上插頭(v.); 插頭、塞子(n.)" },
+  { eng: "socket", ch: "插座(n.)" },
+  { eng: "honeymoon", ch: "蜜月(n.)" },
+  { eng: "mushroom", ch: "蘑菇(n.); 雨後春筍般冒出(v.)" },
+  { eng: "fuel", ch: "燃料、刺激因素(n.); 為...添加燃料(v.)" },
+  { eng: "parcel", ch: "包裹(n.)" },
+  { eng: "disorder", ch: "失調、疾病、混亂失序(n.)" },
+  { eng: "pal", ch: "朋友、夥伴(n.)" },
+  { eng: "comma", ch: "逗點(n.)" },
+  { eng: "period", ch: "句點(n.)" },
+  { eng: "quotes", ch: "上、下引號、引言(n.)" },
+  { eng: "sake", ch: "緣故、利益" },
+  { eng: "for the sake of N.", ch: "為了...好" },
+  { eng: "cough", ch: "咳嗽(v., n.)" },
+  { eng: "delight", ch: "愜意、愉快(n., v.)" },
+  { eng: "hardship", ch: "困境、艱難(n.)" },
+  { eng: "misfortune", ch: "不幸、厄運(n.)" },
+  { eng: "fortunate", ch: "幸運的(adj.)" },
+  { eng: "fortune", ch: "運氣、(大筆)財富(n.)" },
+  { eng: "presentation", ch: "(上台)報告、授予、呈現(n.)" },
+  { eng: "litter", ch: "亂丟垃圾(v.); 垃圾、一窩(n.)" },
+  { eng: "be littered with", ch: "充斥著" },
+  { eng: "pat", ch: "輕拍(v., n.)" },
+  { eng: "labor", ch: "勞動力、工人(n.)" },
+  { eng: "be in labor", ch: "分娩中" },
+  { eng: "laborer", ch: "勞工、工人(n.)" },
+  { eng: "sink", ch: "下沉、(情緒)低落(v.); 水槽(n.)" },
+  { eng: "amuse", ch: "使...開心、娛樂(v.)" },
+  { eng: "amusement park", ch: "遊樂園" },
+  { eng: "cherish", ch: "珍惜(v.)" },
+  { eng: "collapse", ch: "倒塌、(人)倒下 (v., n.)" },
+  { eng: "rid", ch: "擺脫、去除(v., adj.) +of" },
+  { eng: "disgust", ch: "使...噁心、憎惡(v., n.)" },
+  { eng: "exhaust", ch: "使...精疲力竭、耗盡(v.); (引擎排放的)廢棄(n.)" },
+  { eng: "insult", ch: "侮辱(v., n.)" },
+  { eng: "furthermore", ch: "除此之外、再者" },
+  { eng: "namely", ch: "亦即、也就是說" },
+  { eng: "resolve", ch: "解決、下定決心(v.) +to" },
+  { eng: "resolution", ch: "解決辦法、決心、解析度(n.)" },
+  { eng: "keen", ch: "激烈的、熱衷渴望的、敏銳的(adj.)" },
+  { eng: "moral", ch: "道德的(adj.); 寓意(n.)" },
+  { eng: "numerous", ch: "大量的(adj.) +可數n." },
+  { eng: "maximum", ch: "最大值(n.)" },
+  { eng: "minimum", ch: "最小值(n.)" },
+  { eng: "odd", ch: "古怪的、奇數的(adj)" },
+  { eng: "odds", ch: "機會、機率(n.)" },
+  { eng: "against all odds", ch: "克服萬難，在極為不可能情況之下" }
 ];
 
-// 2. 遊戲狀態與記錄變數
+// 2. 遊戲狀態變數
 let wordPool = [];
 let activeEng = [];
 let activeCh = [];
@@ -116,12 +66,11 @@ let remainingCount = 0;
 let successScore = 0;
 let errorScore = 0;
 let wrongWordsSet = new Set();
-let startTime = null; // 用於計算單輪花費秒數
+let startTime = null;
 
-// ⚠️ 請把你在 Google Apps Script 部署得到的 Web App 網址貼在下方雙引號內：
 const GOOGLE_APP_URL = "https://script.google.com/macros/s/AKfycbwxQzgOPKMe8QQE_CZhEyq42uInQ_Nxmf9pT5dLUxBpFUgar9lPZtDtsKmcLneeOJTBBg/exec";
 
-// 3. 亂數洗牌函數 (Fisher-Yates Shuffle)
+// 3. 洗牌演算法
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -131,23 +80,21 @@ function shuffle(array) {
 
 // 4. 初始化遊戲
 function initGame() {
-  let allWords = [...wordBank];
+  let allWords = wordBank.map((item, index) => ({ ...item, id: index }));
   shuffle(allWords);
 
-  // 每回嚴格抽取 45 個單字測試
   const gameSize = Math.min(45, allWords.length);
   wordPool = allWords.slice(0, gameSize);
   remainingCount = wordPool.length;
+
   successScore = 0;
   errorScore = 0;
   wrongWordsSet.clear();
-  updateScoreboard();
 
-  // ⏱️ 記錄此輪遊戲的起點時間
   startTime = new Date();
-
   activeEng = [];
   activeCh = [];
+
   const initialDraw = Math.min(5, wordPool.length);
   for (let i = 0; i < initialDraw; i++) {
     const word = wordPool.pop();
@@ -156,81 +103,137 @@ function initGame() {
   }
 
   shuffle(activeCh);
-  renderColumns();
+  updateScoreboard();
+  buildSlotsOnce(); // 只建立一次 DOM 框框外殼
 
-  document.getElementById('result-modal').classList.add('hidden');
+  const modal = document.getElementById('result-modal');
+  if (modal) modal.classList.add('hidden');
+
   selectedEngSlot = null;
   selectedChSlot = null;
 }
 
 // 5. 更新計分板
 function updateScoreboard() {
-  document.getElementById('remaining-count').textContent = remainingCount;
-  document.getElementById('success-score').textContent = successScore;
-  document.getElementById('error-score').textContent = errorScore;
+  const remEl = document.getElementById('remaining-count');
+  const sucEl = document.getElementById('success-score');
+  const errEl = document.getElementById('error-score');
+
+  if (remEl) remEl.textContent = remainingCount;
+  if (sucEl) sucEl.textContent = successScore;
+  if (errEl) errEl.textContent = errorScore;
 }
 
-// 6. 渲染欄位
-function renderColumns() {
+// 6. 第一次建立固定的 DOM 框框 (避免重複砍掉重蓋)
+function buildSlotsOnce() {
   const engColumn = document.getElementById('english-column');
   const chColumn = document.getElementById('chinese-column');
+  if (!engColumn || !chColumn) return;
+
   engColumn.innerHTML = '';
   chColumn.innerHTML = '';
 
-  activeEng.forEach(word => {
-    const slot = document.createElement('div');
-    slot.className = 'slot fade-in';
-    slot.textContent = word.eng;
-    slot.dataset.type = 'eng';
-    slot.dataset.word = word.eng;
-    slot.addEventListener('click', handleEngClick);
-    engColumn.appendChild(slot);
-  });
+  for (let i = 0; i < 5; i++) {
+    // 英文框
+    const engSlot = document.createElement('div');
+    engSlot.className = 'slot';
+    engSlot.dataset.type = 'eng';
+    engSlot.dataset.index = i;
+    engSlot.addEventListener('click', handleEngClick);
+    engColumn.appendChild(engSlot);
 
-  activeCh.forEach(word => {
-    const slot = document.createElement('div');
-    slot.className = 'slot fade-in';
-    slot.textContent = word.ch;
-    slot.dataset.type = 'ch';
-    slot.dataset.word = word.eng;
-    slot.addEventListener('click', handleChClick);
-    chColumn.appendChild(slot);
-  });
+    // 中文框
+    const chSlot = document.createElement('div');
+    chSlot.className = 'slot';
+    chSlot.dataset.type = 'ch';
+    chSlot.dataset.index = i;
+    chSlot.addEventListener('click', handleChClick);
+    chColumn.appendChild(chSlot);
+  }
+
+  updateSlotContentsSmoothly(false);
 }
 
-// 7. 點擊英文欄處理
+// 7. 平滑更新文字內容（框框不動，只讓裡面的字 Fade Out -> 換字 -> Fade In）
+function updateSlotContentsSmoothly(animateFadeOut = true) {
+  const engSlots = document.querySelectorAll('#english-column .slot');
+  const chSlots = document.querySelectorAll('#chinese-column .slot');
+
+  const applyNewText = () => {
+    // 更新英文欄
+    engSlots.forEach((slot, i) => {
+      if (activeEng[i]) {
+        slot.textContent = activeEng[i].eng;
+        slot.dataset.id = activeEng[i].id;
+        slot.style.visibility = 'visible';
+      } else {
+        slot.style.visibility = 'hidden'; // 字用完時隱藏框
+      }
+      slot.classList.remove('selected', 'wrong', 'fade-out');
+      slot.classList.add('fade-in');
+    });
+
+    // 更新中文欄
+    chSlots.forEach((slot, i) => {
+      if (activeCh[i]) {
+        slot.textContent = activeCh[i].ch;
+        slot.dataset.id = activeCh[i].id;
+        slot.style.visibility = 'visible';
+      } else {
+        slot.style.visibility = 'hidden';
+      }
+      slot.classList.remove('selected', 'wrong', 'fade-out');
+      slot.classList.add('fade-in');
+    });
+  };
+
+  if (animateFadeOut) {
+    // 中文卡片統一先優雅淡出
+    chSlots.forEach(slot => {
+      if (slot.style.visibility !== 'hidden') {
+        slot.classList.add('fade-out');
+      }
+    });
+
+    setTimeout(applyNewText, 250); // 等待淡出動畫完畢再切換文字
+  } else {
+    applyNewText();
+  }
+}
+
+// 8. 點擊英文欄處理
 function handleEngClick(e) {
+  if (e.target.style.visibility === 'hidden') return;
   if (selectedEngSlot) {
     selectedEngSlot.classList.remove('selected');
   }
   selectedEngSlot = e.target;
   selectedEngSlot.classList.add('selected');
-
   if (selectedChSlot) {
     checkMatch();
   }
 }
 
-// 8. 點擊中文欄處理
+// 9. 點擊中文欄處理
 function handleChClick(e) {
+  if (e.target.style.visibility === 'hidden') return;
   if (selectedChSlot) {
     selectedChSlot.classList.remove('selected');
   }
   selectedChSlot = e.target;
   selectedChSlot.classList.add('selected');
-
   if (selectedEngSlot) {
     checkMatch();
   }
 }
 
-// 9. 檢查是否配對成功
+// 10. 檢查配對與動態過渡
 function checkMatch() {
-  const engWord = selectedEngSlot.dataset.word;
-  const chWord = selectedChSlot.dataset.word;
+  const engId = selectedEngSlot.dataset.id;
+  const chId = selectedChSlot.dataset.id;
 
-  if (engWord === chWord) {
-    // 配對成功
+  if (engId === chId) {
+    // 答對：被點選的兩個字先 Fade Out 淡出
     selectedEngSlot.classList.add('fade-out');
     selectedChSlot.classList.add('fade-out');
     remainingCount--;
@@ -241,47 +244,42 @@ function checkMatch() {
     selectedChSlot = null;
 
     setTimeout(() => {
-      // 🎯 關鍵修正：精準找出這顆單字在 activeEng 與 activeCh 陣列中的記憶體位置
-      const engIndex = activeEng.findIndex(w => w.eng === engWord);
-      const chIndex = activeCh.findIndex(w => w.eng === engWord);
+      const targetId = parseInt(engId, 10);
+      const engIndex = activeEng.findIndex(w => w.id === targetId);
+      const chIndex = activeCh.findIndex(w => w.id === targetId);
 
       if (wordPool.length > 0) {
-        // 字庫還有字，抽新字精準遞補到該位置
         const nextWord = wordPool.pop();
         if (engIndex !== -1) activeEng[engIndex] = nextWord;
         if (chIndex !== -1) activeCh[chIndex] = nextWord;
       } else {
-        // 字庫空了，將此題從記憶體陣列中精準移除（畫面單字開始遞減）
         if (engIndex !== -1) activeEng.splice(engIndex, 1);
         if (chIndex !== -1) activeCh.splice(chIndex, 1);
       }
 
-      // 🎲 每次答對後，將剩下的中文陣列重新亂數洗牌
+      // 中文欄重新打亂順序
       shuffle(activeCh);
+      
+      // 使用平滑淡出/淡入更新文字，框框完全不會閃爍！
+      updateSlotContentsSmoothly(true);
 
-      // 🔄 關鍵修正：直接呼叫 renderColumns()，徹底杜絕 DOM 節點與資料錯位的卡關 Bug
-      renderColumns();
-
-      // 🏁 檢查遊戲是否結束
       if (activeEng.length === 0) {
         showResult();
       }
-    }, 500);
-
+    }, 400);
   } else {
-    // 配對失敗
+    // 答錯：閃紅燈提示
     errorScore++;
     updateScoreboard();
 
-    const wrongEngText = selectedEngSlot.textContent;
-    const correctWordObj = wordBank.find(w => w.eng === wrongEngText);
+    const wrongEngId = parseInt(selectedEngSlot.dataset.id, 10);
+    const correctWordObj = wordBank[wrongEngId];
     if (correctWordObj) {
       wrongWordsSet.add(`${correctWordObj.eng}(${correctWordObj.ch})`);
     }
 
     selectedEngSlot.classList.add('wrong');
     selectedChSlot.classList.add('wrong');
-
     const currentEng = selectedEngSlot;
     const currentCh = selectedChSlot;
     selectedEngSlot = null;
@@ -294,42 +292,44 @@ function checkMatch() {
   }
 }
 
-// 10. 顯示結算畫面彈出視窗 + 暗中上傳結果與時間記錄至 Google 試算表
+// 11. 顯示結算視窗
 function showResult() {
-  document.getElementById('final-success').textContent = successScore;
-  document.getElementById('final-error').textContent = errorScore;
+  const finalSuc = document.getElementById('final-success');
+  const finalErr = document.getElementById('final-error');
+  if (finalSuc) finalSuc.textContent = successScore;
+  if (finalErr) finalErr.textContent = errorScore;
 
   const wrongWordsList = document.getElementById('wrong-words-list');
-  wrongWordsList.innerHTML = '';
+  const wrongWordsBox = document.getElementById('wrong-words-box');
   let wrongWordsString = "";
 
+  if (wrongWordsList) wrongWordsList.innerHTML = '';
+
   if (wrongWordsSet.size > 0) {
-    document.getElementById('wrong-words-box').style.display = 'block';
+    if (wrongWordsBox) wrongWordsBox.style.display = 'block';
     let items = [];
     wrongWordsSet.forEach(wordStr => {
       items.push(wordStr);
-      const li = document.createElement('li');
-      li.textContent = wordStr;
-      wrongWordsList.appendChild(li);
+      if (wrongWordsList) {
+        const li = document.createElement('li');
+        li.textContent = wordStr;
+        wrongWordsList.appendChild(li);
+      }
     });
     wrongWordsString = items.join(", ");
   } else {
-    document.getElementById('wrong-words-box').style.display = 'none';
+    if (wrongWordsBox) wrongWordsBox.style.display = 'none';
     wrongWordsString = "無答錯單字";
   }
 
-  // ⏱️ 計算時間花費（秒數）
   const endTime = new Date();
   const timeSpentSeconds = startTime ? Math.round((endTime - startTime) / 1000) : 0;
 
-  // 🤫 修正傳輸格式：改用 text/plain 繞過瀏覽器的 CORS 攔截，確保 100% 成功傳送
   if (GOOGLE_APP_URL && GOOGLE_APP_URL !== "YOUR_PASTED_URL_HERE") {
     fetch(GOOGLE_APP_URL, {
       method: 'POST',
       mode: 'no-cors',
-      headers: {
-        'Content-Type': 'text/plain;charset=utf-8'
-      },
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify({
         successScore: successScore,
         errorScore: errorScore,
@@ -339,9 +339,18 @@ function showResult() {
     }).catch(err => console.log("Silent logging status:", err));
   }
 
-  document.getElementById('result-modal').classList.remove('hidden');
+  const modal = document.getElementById('result-modal');
+  if (modal) modal.classList.remove('hidden');
 }
 
-// 11. 監聽重新開始按鈕與網頁載入
-document.getElementById('restart-btn').addEventListener('click', initGame);
-window.addEventListener('DOMContentLoaded', initGame);
+// 12. 啟動入口
+function startApp() {
+  document.getElementById('restart-btn')?.addEventListener('click', initGame);
+  initGame();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', startApp);
+} else {
+  startApp();
+}
