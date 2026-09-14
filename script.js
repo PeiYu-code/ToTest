@@ -1,4 +1,4 @@
-// 1. 單字資料庫 (包含所有單字)
+// 1. 單字資料庫
 const wordBank = [
   { eng: "recipe", ch: "食譜(n.)" },
   { eng: "silk", ch: "絲綢(n.)" },
@@ -124,7 +124,7 @@ function updateScoreboard() {
   if (errEl) errEl.textContent = errorScore;
 }
 
-// 6. 第一次建立固定的 DOM 框框外殼
+// 6. 建立固定 DOM 結構與內部 span 容器
 function buildSlotsOnce() {
   const engColumn = document.getElementById('english-column');
   const chColumn = document.getElementById('chinese-column');
@@ -158,10 +158,11 @@ function buildSlotsOnce() {
   updateSlotContentsSmoothly(false);
 }
 
-// 7. 實現完美的「框不動，字淡出淡入」
+// 7. 文字層級淡出 / 淡入切換邏輯 (等待時間同步改為 800ms)
 function updateSlotContentsSmoothly(animate = true) {
   const engSlots = document.querySelectorAll('#english-column .slot');
   const chSlots = document.querySelectorAll('#chinese-column .slot');
+  const allSpans = document.querySelectorAll('.slot-text');
 
   const updateTexts = () => {
     engSlots.forEach((slot, i) => {
@@ -174,8 +175,6 @@ function updateSlotContentsSmoothly(animate = true) {
         slot.style.visibility = 'hidden';
       }
       slot.classList.remove('selected', 'wrong');
-      span.classList.remove('text-fade-out');
-      span.classList.add('text-fade-in');
     });
 
     chSlots.forEach((slot, i) => {
@@ -188,24 +187,20 @@ function updateSlotContentsSmoothly(animate = true) {
         slot.style.visibility = 'hidden';
       }
       slot.classList.remove('selected', 'wrong');
-      span.classList.remove('text-fade-out');
-      span.classList.add('text-fade-in');
     });
+
+    allSpans.forEach(span => span.classList.remove('text-fade-out'));
   };
 
   if (animate) {
-    document.querySelectorAll('.slot-text').forEach(span => {
-      span.classList.remove('text-fade-in');
-      span.classList.add('text-fade-out');
-    });
-
-    setTimeout(updateTexts, 250);
+    allSpans.forEach(span => span.classList.add('text-fade-out'));
+    setTimeout(updateTexts, 800);
   } else {
     updateTexts();
   }
 }
 
-// 8. 點擊英文欄處理
+// 8. 點擊英文欄
 function handleEngClick(e) {
   const slot = e.currentTarget;
   if (slot.style.visibility === 'hidden') return;
@@ -219,7 +214,7 @@ function handleEngClick(e) {
   }
 }
 
-// 9. 點擊中文欄處理
+// 9. 點擊中文欄
 function handleChClick(e) {
   const slot = e.currentTarget;
   if (slot.style.visibility === 'hidden') return;
@@ -233,7 +228,7 @@ function handleChClick(e) {
   }
 }
 
-// 10. 檢查配對
+// 10. 配對邏輯
 function checkMatch() {
   const engId = selectedEngSlot.dataset.id;
   const chId = selectedChSlot.dataset.id;
@@ -263,7 +258,7 @@ function checkMatch() {
     updateSlotContentsSmoothly(true);
 
     if (activeEng.length === 0) {
-      setTimeout(showResult, 500);
+      setTimeout(showResult, 800);
     }
   } else {
     errorScore++;
@@ -289,7 +284,7 @@ function checkMatch() {
   }
 }
 
-// 11. 顯示結算
+// 11. 結算畫面
 function showResult() {
   const finalSuc = document.getElementById('final-success');
   const finalErr = document.getElementById('final-error');
@@ -340,7 +335,7 @@ function showResult() {
   if (modal) modal.classList.remove('hidden');
 }
 
-// 12. 啟動入口
+// 12. 啟動進入點
 function startApp() {
   document.getElementById('restart-btn')?.addEventListener('click', initGame);
   initGame();
