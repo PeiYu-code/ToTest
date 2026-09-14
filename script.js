@@ -104,7 +104,7 @@ function initGame() {
 
   shuffle(activeCh);
   updateScoreboard();
-  buildSlotsOnce(); // 只建立一次 DOM 框框外殼
+  buildSlotsOnce();
 
   const modal = document.getElementById('result-modal');
   if (modal) modal.classList.add('hidden');
@@ -124,7 +124,7 @@ function updateScoreboard() {
   if (errEl) errEl.textContent = errorScore;
 }
 
-// 6. 第一次建立固定的 DOM 框框 (避免重複砍掉重蓋)
+// 6. 第一次建立固定的 DOM 框框外殼
 function buildSlotsOnce() {
   const engColumn = document.getElementById('english-column');
   const chColumn = document.getElementById('chinese-column');
@@ -134,80 +134,85 @@ function buildSlotsOnce() {
   chColumn.innerHTML = '';
 
   for (let i = 0; i < 5; i++) {
-    // 英文框
     const engSlot = document.createElement('div');
     engSlot.className = 'slot';
     engSlot.dataset.type = 'eng';
-    engSlot.dataset.index = i;
     engSlot.addEventListener('click', handleEngClick);
+
+    const engSpan = document.createElement('span');
+    engSpan.className = 'slot-text';
+    engSlot.appendChild(engSpan);
     engColumn.appendChild(engSlot);
 
-    // 中文框
     const chSlot = document.createElement('div');
     chSlot.className = 'slot';
     chSlot.dataset.type = 'ch';
-    chSlot.dataset.index = i;
     chSlot.addEventListener('click', handleChClick);
+
+    const chSpan = document.createElement('span');
+    chSpan.className = 'slot-text';
+    chSlot.appendChild(chSpan);
     chColumn.appendChild(chSlot);
   }
 
   updateSlotContentsSmoothly(false);
 }
 
-// 7. 平滑更新文字內容（框框不動，只讓裡面的字 Fade Out -> 換字 -> Fade In）
-function updateSlotContentsSmoothly(animateFadeOut = true) {
+// 7. 實現完美的「框不動，字淡出淡入」
+function updateSlotContentsSmoothly(animate = true) {
   const engSlots = document.querySelectorAll('#english-column .slot');
   const chSlots = document.querySelectorAll('#chinese-column .slot');
 
-  const applyNewText = () => {
-    // 更新英文欄
+  const updateTexts = () => {
     engSlots.forEach((slot, i) => {
+      const span = slot.querySelector('.slot-text');
       if (activeEng[i]) {
-        slot.textContent = activeEng[i].eng;
+        span.textContent = activeEng[i].eng;
         slot.dataset.id = activeEng[i].id;
         slot.style.visibility = 'visible';
       } else {
-        slot.style.visibility = 'hidden'; // 字用完時隱藏框
+        slot.style.visibility = 'hidden';
       }
-      slot.classList.remove('selected', 'wrong', 'fade-out');
-      slot.classList.add('fade-in');
+      slot.classList.remove('selected', 'wrong');
+      span.classList.remove('text-fade-out');
+      span.classList.add('text-fade-in');
     });
 
-    // 更新中文欄
     chSlots.forEach((slot, i) => {
+      const span = slot.querySelector('.slot-text');
       if (activeCh[i]) {
-        slot.textContent = activeCh[i].ch;
+        span.textContent = activeCh[i].ch;
         slot.dataset.id = activeCh[i].id;
         slot.style.visibility = 'visible';
       } else {
         slot.style.visibility = 'hidden';
       }
-      slot.classList.remove('selected', 'wrong', 'fade-out');
-      slot.classList.add('fade-in');
+      slot.classList.remove('selected', 'wrong');
+      span.classList.remove('text-fade-out');
+      span.classList.add('text-fade-in');
     });
   };
 
-  if (animateFadeOut) {
-    // 中文卡片統一先優雅淡出
-    chSlots.forEach(slot => {
-      if (slot.style.visibility !== 'hidden') {
-        slot.classList.add('fade-out');
-      }
+  if (animate) {
+    document.querySelectorAll('.slot-text').forEach(span => {
+      span.classList.remove('text-fade-in');
+      span.classList.add('text-fade-out');
     });
 
-    setTimeout(applyNewText, 250); // 等待淡出動畫完畢再切換文字
+    setTimeout(updateTexts, 250);
   } else {
-    applyNewText();
+    updateTexts();
   }
 }
 
 // 8. 點擊英文欄處理
 function handleEngClick(e) {
-  if (e.target.style.visibility === 'hidden') return;
+  const slot = e.currentTarget;
+  if (slot.style.visibility === 'hidden') return;
   if (selectedEngSlot) {
     selectedEngSlot.classList.remove('selected');
   }
-  selectedEngSlot = e.target;
+  selectedEngSlot = slot;
   selectedEngSlot.classList.add('selected');
   if (selectedChSlot) {
     checkMatch();
@@ -216,26 +221,24 @@ function handleEngClick(e) {
 
 // 9. 點擊中文欄處理
 function handleChClick(e) {
-  if (e.target.style.visibility === 'hidden') return;
+  const slot = e.currentTarget;
+  if (slot.style.visibility === 'hidden') return;
   if (selectedChSlot) {
     selectedChSlot.classList.remove('selected');
   }
-  selectedChSlot = e.target;
+  selectedChSlot = slot;
   selectedChSlot.classList.add('selected');
   if (selectedEngSlot) {
     checkMatch();
   }
 }
 
-// 10. 檢查配對與動態過渡
+// 10. 檢查配對
 function checkMatch() {
   const engId = selectedEngSlot.dataset.id;
   const chId = selectedChSlot.dataset.id;
 
   if (engId === chId) {
-    // 答對：被點選的兩個字先 Fade Out 淡出
-    selectedEngSlot.classList.add('fade-out');
-    selectedChSlot.classList.add('fade-out');
     remainingCount--;
     successScore++;
     updateScoreboard();
@@ -243,32 +246,26 @@ function checkMatch() {
     selectedEngSlot = null;
     selectedChSlot = null;
 
-    setTimeout(() => {
-      const targetId = parseInt(engId, 10);
-      const engIndex = activeEng.findIndex(w => w.id === targetId);
-      const chIndex = activeCh.findIndex(w => w.id === targetId);
+    const targetId = parseInt(engId, 10);
+    const engIndex = activeEng.findIndex(w => w.id === targetId);
+    const chIndex = activeCh.findIndex(w => w.id === targetId);
 
-      if (wordPool.length > 0) {
-        const nextWord = wordPool.pop();
-        if (engIndex !== -1) activeEng[engIndex] = nextWord;
-        if (chIndex !== -1) activeCh[chIndex] = nextWord;
-      } else {
-        if (engIndex !== -1) activeEng.splice(engIndex, 1);
-        if (chIndex !== -1) activeCh.splice(chIndex, 1);
-      }
+    if (wordPool.length > 0) {
+      const nextWord = wordPool.pop();
+      if (engIndex !== -1) activeEng[engIndex] = nextWord;
+      if (chIndex !== -1) activeCh[chIndex] = nextWord;
+    } else {
+      if (engIndex !== -1) activeEng.splice(engIndex, 1);
+      if (chIndex !== -1) activeCh.splice(chIndex, 1);
+    }
 
-      // 中文欄重新打亂順序
-      shuffle(activeCh);
-      
-      // 使用平滑淡出/淡入更新文字，框框完全不會閃爍！
-      updateSlotContentsSmoothly(true);
+    shuffle(activeCh);
+    updateSlotContentsSmoothly(true);
 
-      if (activeEng.length === 0) {
-        showResult();
-      }
-    }, 400);
+    if (activeEng.length === 0) {
+      setTimeout(showResult, 500);
+    }
   } else {
-    // 答錯：閃紅燈提示
     errorScore++;
     updateScoreboard();
 
@@ -292,7 +289,7 @@ function checkMatch() {
   }
 }
 
-// 11. 顯示結算視窗
+// 11. 顯示結算
 function showResult() {
   const finalSuc = document.getElementById('final-success');
   const finalErr = document.getElementById('final-error');
