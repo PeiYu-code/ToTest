@@ -93,19 +93,15 @@ h1 {
   background-color: #fdf2f2;
 }
 
-/* 文字層級動畫：只讓字淡出淡入，外框不動 */
+/* 超平滑文字層級過渡：拉長至 0.8 秒 */
 .slot-text {
   display: inline-block;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.8s ease-in-out;
   opacity: 1;
 }
 
-.text-fade-out {
+.slot-text.text-fade-out {
   opacity: 0;
-}
-
-.text-fade-in {
-  opacity: 1;
 }
 
 .modal {
