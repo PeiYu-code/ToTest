@@ -158,7 +158,7 @@ function buildSlotsOnce() {
   updateSlotContentsSmoothly(false);
 }
 
-// 7. 文字層級淡出 / 淡入切換邏輯 (等待時間同步改為 3200ms)
+// 7. 文字層級淡出 / 淡入切換邏輯 (等待時間同步改為 32000ms = 32秒)
 function updateSlotContentsSmoothly(animate = true) {
   const engSlots = document.querySelectorAll('#english-column .slot');
   const chSlots = document.querySelectorAll('#chinese-column .slot');
@@ -194,7 +194,7 @@ function updateSlotContentsSmoothly(animate = true) {
 
   if (animate) {
     allSpans.forEach(span => span.classList.add('text-fade-out'));
-    setTimeout(updateTexts, 3200);
+    setTimeout(updateTexts, 32000);
   } else {
     updateTexts();
   }
@@ -258,7 +258,7 @@ function checkMatch() {
     updateSlotContentsSmoothly(true);
 
     if (activeEng.length === 0) {
-      setTimeout(showResult, 3200);
+      setTimeout(showResult, 32000);
     }
   } else {
     errorScore++;
