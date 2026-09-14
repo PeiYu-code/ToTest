@@ -93,10 +93,10 @@ h1 {
   background-color: #fdf2f2;
 }
 
-/* 超極極緩慢動畫：過渡時間設定為 3.2 秒 (慢四倍) */
+/* 超超級極緩慢動畫：過渡時間設定為 32 秒 */
 .slot-text {
   display: inline-block;
-  transition: opacity 3.2s ease-in-out;
+  transition: opacity 32s ease-in-out;
   opacity: 1;
 }
 
